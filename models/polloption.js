@@ -11,9 +11,11 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      models.pollOption.belongsTo(models.poll, { foreignKey: 'pollId', targetKey: 'id' });
+      models.pollOption.belongsTo(models.poll, {foreignKey: 'pollId', targetKey: 'id', as: 'poll'});
+      models.pollOption.hasMany(models.votes, {sourceKey: 'id', foreignKey: 'optionId', as: 'votes'});
     }
   }
+
   pollOption.init({
     title: DataTypes.STRING,
     pollId: DataTypes.INTEGER

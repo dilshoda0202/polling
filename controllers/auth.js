@@ -3,7 +3,7 @@ const router = express.Router();
 const passport = require('../config/ppConfig');
 
 // import models
-const { user } = require('../models');
+const {user} = require('../models');
 
 
 router.get("/signup", (req, res) => {
@@ -33,11 +33,11 @@ router.post('/login', passport.authenticate('local', {
 
 router.post('/signup', async (req, res) => {
   // we now have access to the user info (req.body);
-  const { email, name, password } = req.body; // goes and us access to whatever key/value inside of the object
+  const {email, name, password} = req.body; // goes and us access to whatever key/value inside of the object
   try {
     const [_user, created] = await user.findOrCreate({
-      where: { email },
-      defaults: { name, password }
+      where: {email},
+      defaults: {name, password}
     });
 
     if (created) {
@@ -47,7 +47,7 @@ router.post('/signup', async (req, res) => {
         successRedirect: '/',
         successFlash: `Welcome ${_user.name}. Account was created and logging in...`
       }
-      // 
+      //
       passport.authenticate('local', successObject)(req, res);
     } else {
       // Send back email already exists
