@@ -7,6 +7,7 @@ const flash = require('connect-flash');
 const passport = require('./config/ppConfig');
 const isLoggedIn = require('./middleware/isLoggedIn');
 const axios = require('axios');
+const { poll: pollModel } = require('./models')
 
 // home route
 app.get('/movies', function (req, res) {
@@ -53,9 +54,20 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get('/', isLoggedIn, (req, res) => {
-  res.render('index');
-})
+app.get('/', isLoggedIn, async (req, res) => {
+  const polls = await pollModel.findAll({ raw: true })
+  res.render('index', { polls: polls });
+});
+
+app.get('/newpoll', isLoggedIn, (req, res) => {
+  res.render('newpoll');
+});
+
+app.post('/newpoll', isLoggedIn, async (req, res) => {
+  console.log(req.body);
+  await pollModel.create({ topic: req.body.topic });
+  res.redirect('/')
+});
 
 app.use('/auth', require('./controllers/auth'));
 

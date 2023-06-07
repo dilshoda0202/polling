@@ -18,6 +18,12 @@
         </div>
     </main>
 
+    <% for (let poll of polls) {%>
+    <div>
+        <%= poll.topic %>
+    </div>
+    <% } %>
+
     <footer>
         <%- include('./partials/footer'); %>
     </footer>
