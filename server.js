@@ -9,7 +9,7 @@ const isLoggedIn = require('./middleware/isLoggedIn');
 const axios = require('axios');
 
 // home route
-app.get('/', function (req, res) {
+app.get('/movies', function (req, res) {
   const url = 'https://serpapi.com/search.json?q=eternals+theater&location=Austin,+Texas,+United+States&hl=en&gl=us'
   axios.get(url, { params: { api_key: process.env.API_KEY } })
     .then(function (response) {
@@ -53,7 +53,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get('/', (req, res) => {
+app.get('/', isLoggedIn, (req, res) => {
   res.render('index');
 })
 
