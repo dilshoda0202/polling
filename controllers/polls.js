@@ -5,7 +5,7 @@ const express = require("express");
 const router = express.Router();
 
 router.post('/new', isLoggedIn, async (req, res) => {
-  const poll = await models.poll.create({topic: req.body.topic});
+  const poll = await models.poll.create({topic: req.body.topic, creatorId: req.user.id});
   const promises = [];
   for (let i = 1; i < 10; i++) {
     const title = req.body[`option${i}`];
@@ -35,6 +35,16 @@ router.post('/vote', isLoggedIn, async (req, res) => {
     userId: userId,
   });
   res.status(200).json(vote.get({plain: true}));
+});
+
+
+router.delete('/:id', isLoggedIn, async (req, res) => {
+  await models.poll.destroy({
+    where: {
+      id: req.params.id
+    }
+  });
+  res.status(204);
 });
 
 module.exports = router;

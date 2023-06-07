@@ -38,6 +38,14 @@
                         </div>
                     <% } %>
                 </div>
+                <% if (poll.isOwner) { %>
+                    <div class="flex justify-end mt-4">
+                        <button class="border border-gray-300 rounded-md p-2.5 hover:bg-gray-50"
+                                onclick="remove(<%= poll.id %>)">
+                            <i data-feather="trash" style="stroke-width: 1.5px; width: 20px"></i>
+                        </button>
+                    </div>
+                <% } %>
             </div>
         <% } %>
     </div>
@@ -56,6 +64,13 @@
             method: "POST",
             body: JSON.stringify({pollId, optionId}),
             headers: {'Content-Type': 'application/json'}
+        });
+        window.location.reload();
+    }
+
+    async function remove(pollId) {
+        await fetch(`/polls/${pollId}/`, {
+            method: "DELETE"
         });
         window.location.reload();
     }

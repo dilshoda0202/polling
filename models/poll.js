@@ -17,7 +17,8 @@ module.exports = (sequelize, DataTypes) => {
   }
 
   poll.init({
-    topic: DataTypes.STRING
+    topic: DataTypes.STRING,
+    creatorId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'poll',

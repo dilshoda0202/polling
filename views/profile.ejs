@@ -1,98 +1,23 @@
-<div class="container">
-  <div class="main-body">
-
-    <!-- Breadcrumb -->
-    <nav aria-label="breadcrumb" class="main-breadcrumb">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="/">Home</a></li>
-        <li class="breadcrumb-item"><a href="javascript:void(0)">User</a></li>
-        <li class="breadcrumb-item active" aria-current="page">User Profile</li>
-      </ol>
-    </nav>
-    <!-- /Breadcrumb -->
-    <div class="container mx-auto flex flex-col items-center">
-      <div class="row gutters-sm">
-        <div class="col-md-4 mb-3">
-          <div class="card">
-            <div class="card-body">
-              <div class="d-flex flex-column align-items-center text-center">
-                <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle"
-                  width="150">
-                <div class="mt-3">
-                  <h4><%= name %></h4>
-                  <p class="text-secondary mb-1">Full Stack Developer</p>
-                  <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
-                  <button class="btn btn-primary">Follow</button>
-                  <button class="btn btn-outline-primary">Message</button>
-                </div>
-              </div>
-            </div>
-          </div>
+<div class="container mx-auto flex flex-col items-center pt-10">
+    <div class="flex flex-wrap lg:flex-nowrap justify-center lg:w-3/5 gap-5">
+        <div style="width: 150px; height: 150px">
+            <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-full" height="180"
+                 width="180">
         </div>
-        <div class="col-md-8">
-          <div class="card mb-3">
-            <div class="card-body">
-              <div class="row">
-                <div class="col-sm-3">
-                  <h6 class="mb-0">Full Name</h6>
-                </div>
-                <div class="col-sm-9 text-secondary">
-                  <%= name %>
-                </div>
-              </div>
-              <hr>
-              <div class="row">
-                <div class="col-sm-3">
-                  <h6 class="mb-0">Email</h6>
-                </div>
-                <div class="col-sm-9 text-secondary">
-                  <%= email %>
-                </div>
-              </div>
-              <hr>
-              <div class="row">
-                <div class="col-sm-3">
-                  <h6 class="mb-0">Phone</h6>
-                </div>
-                <div class="col-sm-9 text-secondary">
-                  (239) 816-9029
-                </div>
-              </div>
-              <hr>
-              <div class="row">
-                <div class="col-sm-3">
-                  <h6 class="mb-0">Mobile</h6>
-                </div>
-                <div class="col-sm-9 text-secondary">
-                  (320) 380-4539
-                </div>
-              </div>
-              <hr>
-              <div class="row">
-                <div class="col-sm-3">
-                  <h6 class="mb-0">Address</h6>
-                </div>
-                <div class="col-sm-9 text-secondary">
-                  Bay Area, San Francisco, CA
-                </div>
-              </div>
-              <hr>
-              <div class="row">
-                <div class="col-sm-12">
-                  <a class="btn btn-info " target="__blank"
-                    href="https://www.bootdey.com/snippets/view/profile-edit-data-and-skills">Edit</a>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div class="w-full lg:w-auto flex-auto">
+            <form method="POST" action="/profile/edit" class="flex flex-col items-end gap-4">
+                <label class="w-full">
+                    <input class="border border-gray-300 placeholder-gray-600 outline-none w-full rounded-md text-base font-normal pr-2 pl-3.5 py-2.5 focus:border-blue-500"
+                           name="name" type="text" value="<%= name %>">
+                </label>
+                <label class="w-full">
+                    <input class="border border-gray-300 placeholder-gray-600 outline-none w-full rounded-md text-base font-normal pr-2 pl-3.5 py-2.5 focus:border-blue-500"
+                           name="email" type="email" value="<%= email %>">
+                </label>
+                <button class="text-white bg-black w-full py-3 rounded-md" style="max-width: 200px">
+                    Save
+                </button>
+            </form>
         </div>
-      </div>
     </div>
-  </div>
-
-
-</div>
-</div>
-
-</div>
 </div>
