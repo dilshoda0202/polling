@@ -6,6 +6,22 @@ const session = require('express-session');
 const flash = require('connect-flash');
 const passport = require('./config/ppConfig');
 const isLoggedIn = require('./middleware/isLoggedIn');
+const axios = require('axios');
+
+// home route
+app.get('/', function (req, res) {
+  const url = 'https://serpapi.com/search.json?q=eternals+theater&location=Austin,+Texas,+United+States&hl=en&gl=us'
+  axios.get(url, { params: { api_key: process.env.API_KEY } })
+    .then(function (response) {
+      console.log('test data', response.data)
+      // handle success
+      return res.render('movies', { movies: response.data });
+    })
+    .catch(function (error) {
+      res.json({ message: 'Data not found. Please try again later.' });
+    });
+});
+
 
 
 SECRET_SESSION = process.env.SECRET_SESSION;
