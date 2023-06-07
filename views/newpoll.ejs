@@ -1,7 +1,44 @@
-<form action="/newpoll" method="post">
-    <label>
-        <span>Poll topic</span>
-        <input type="text" name="topic">
-    </label>
-    <button type="submit">New poll</button>
-</form>
+<div class="container flex flex-col items-center">
+    <h1 class="text-2xl">Create a new poll</h1>
+    <form class="flex flex-col items-center gap-5 mt-4 w-[400px]" action="/polls/new" method="post">
+        <label class="w-full">
+            <span>Poll topic</span>
+            <input class="border border-gray-300 placeholder-gray-600 outline-none w-full rounded-md text-base font-normal pr-2 pl-3.5 py-2.5 focus:border-blue-500 mt-2"
+                   type="text" name="topic">
+        </label>
+        <div id="options" class="flex flex-col gap-3 w-full">
+        </div>
+        <button class="border border-gray-300 rounded-md w-[150px] py-2.5" type="button" onclick="newOption()">+</button>
+        <button class="border border-gray-300 rounded-md w-full py-3" type="submit">New poll</button>
+    </form>
+</div>
+
+
+<script>
+    function optionEl(i) {
+        const label = document.createElement("label");
+        const input = document.createElement("input");
+        const span = document.createElement("span");
+
+        input.id = `option${i}`;
+        input.name = input.id;
+        input.className = "border border-gray-300 placeholder-gray-600 outline-none w-full rounded-md text-base font-normal pr-2 pl-3.5 py-2.5 focus:border-blue-500 mt-2";
+        span.innerText = `Option ${i}`;
+        label.append(span);
+        label.append(input);
+        return label;
+    }
+
+    function newOption() {
+        const parent = document.querySelector("#options");
+        const children = parent.children;
+        const last = children[children.length - 1];
+        const lastElId = last.children[1].id.replace("option", "");
+        parent.append(optionEl(parseInt(lastElId) + 1));
+    }
+
+    window.addEventListener("load", () => {
+        const parent = document.querySelector("#options");
+        parent.append(optionEl(1));
+    });
+</script>

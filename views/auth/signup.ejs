@@ -1,117 +1,33 @@
-<!-- Section: Design Block -->
-<section class="background-radial-gradient overflow-hidden">
-  <style>
-    .background-radial-gradient {
-      background-color: hsl(218, 41%, 15%);
-      background-image: radial-gradient(650px circle at 0% 0%,
-          hsl(218, 41%, 35%) 15%,
-          hsl(218, 41%, 30%) 35%,
-          hsl(218, 41%, 20%) 75%,
-          hsl(218, 41%, 19%) 80%,
-          transparent 100%),
-        radial-gradient(1250px circle at 100% 100%,
-          hsl(218, 41%, 45%) 15%,
-          hsl(218, 41%, 30%) 35%,
-          hsl(218, 41%, 20%) 75%,
-          hsl(218, 41%, 19%) 80%,
-          transparent 100%);
-    }
-
-    #radius-shape-1 {
-      height: 220px;
-      width: 220px;
-      top: -60px;
-      left: -130px;
-      background: radial-gradient(#44006b, #ad1fff);
-      overflow: hidden;
-    }
-
-    #radius-shape-2 {
-      border-radius: 38% 62% 63% 37% / 70% 33% 67% 30%;
-      bottom: -60px;
-      right: -110px;
-      width: 300px;
-      height: 300px;
-      background: radial-gradient(#44006b, #ad1fff);
-      overflow: hidden;
-    }
-
-    .bg-glass {
-      background-color: hsla(0, 0%, 100%, 0.9) !important;
-      backdrop-filter: saturate(200%) blur(25px);
-    }
-  </style>
-
-  <div class="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
-    <div class="row gx-lg-5 align-items-center mb-5">
-      <div class="col-lg-6 mb-5 mb-lg-0" style="z-index: 10">
-        <h1 class="my-5 display-5 fw-bold ls-tight" style="color: hsl(218, 81%, 95%)">
-          The best offer <br />
-          <span style="color: hsl(218, 81%, 75%)">for your business</span>
-        </h1>
-        <p class="mb-4 opacity-70" style="color: hsl(218, 81%, 85%)">
-
-        </p>
-      </div>
-
-      <div class="col-lg-6 mb-5 mb-lg-0 position-relative">
-        <div id="radius-shape-1" class="position-absolute rounded-circle shadow-5-strong"></div>
-        <div id="radius-shape-2" class="position-absolute shadow-5-strong"></div>
-
-        <div class="card bg-glass">
-          <div class="card-body px-4 py-5 px-md-5">
-            <form action="/auth/signup" method="POST">
-              <!-- 2 column grid layout with text inputs for the first and last names -->
-              <div class="row">
-                <div class="col-md-6 mb-4">
-                  <div class="form-outline">
-                    <input name="name" type="text" id="form3Example1" class="form-control" />
-                    <label class="form-label" for="form3Example1">Name</label>
-                  </div>
+<section class="h-[90vh]">
+    <div class="container h-full py-5">
+        <div class="flex flex-col justify-center items-center h-full">
+            <img src="/assets/logo.png" width="150" height="150" class="mb-10">
+            <div class="bg-primary rounded-md px-24 py-20">
+                <form action="/auth/signup" class="flex flex-col gap-5 mb-4 w-[400px]" method="POST">
+                    <label class="block">
+                        <input type="text"
+                               placeholder="Your name"
+                               class="border border-gray-300 placeholder-gray-600 outline-none w-full rounded-md text-base font-normal pr-2 pl-3.5 py-2.5 focus:border-blue-500"
+                               name="name"/>
+                    </label>
+                    <label class="block">
+                        <input type="email"
+                               placeholder="Email"
+                               class="border border-gray-300 placeholder-gray-600 outline-none w-full rounded-md text-base font-normal pr-2 pl-3.5 py-2.5 focus:border-blue-500"
+                               name="email"/>
+                    </label>
+                    <label class="block">
+                        <input type="password" name="password"
+                               placeholder="Password"
+                               class="border border-gray-300 placeholder-gray-600 outline-none w-full rounded-md text-base font-normal pr-2 pl-3.5 py-2.5 focus:border-blue-500"/>
+                    </label>
+                    <button class="text-white bg-black w-full py-3 rounded-md" type="submit">Sign up</button>
+                </form>
+                <div>
+                    Already have an account?
+                    <a href="/auth/login" class="cursor-pointer text-blue-700 hover:text-blue-500">Sign in</a>
                 </div>
-              </div>
-
-              <!-- Email input -->
-              <div class="form-outline mb-4">
-                <input name="email" type="email" id="form3Example3" class="form-control" />
-                <label class="form-label" for="form3Example3">Email address</label>
-              </div>
-
-              <!-- Password input -->
-              <div class="form-outline mb-4">
-                <input name="password" type="password" id="form3Example4" class="form-control" />
-                <label class="form-label" for="form3Example4">Password</label>
-              </div>
-
-              <!-- Submit button -->
-              <button type="submit" class="btn btn-primary btn-block mb-4">
-                Sign up
-              </button>
-
-              <!-- Register buttons -->
-              <div class="text-center">
-                <p>or sign up with:</p>
-                <button type="button" class="btn btn-link btn-floating mx-1">
-                  <i class="fab fa-facebook-f"></i>
-                </button>
-
-                <button type="button" class="btn btn-link btn-floating mx-1">
-                  <i class="fab fa-google"></i>
-                </button>
-
-                <button type="button" class="btn btn-link btn-floating mx-1">
-                  <i class="fab fa-twitter"></i>
-                </button>
-
-                <button type="button" class="btn btn-link btn-floating mx-1">
-                  <i class="fab fa-github"></i>
-                </button>
-              </div>
-            </form>
-          </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </section>
-<!-- Section: Design Block -->
