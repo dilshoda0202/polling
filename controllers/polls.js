@@ -1,8 +1,31 @@
 const isLoggedIn = require("../middleware/isLoggedIn");
 const models = require("../models");
 const express = require("express");
+const axios = require("axios");
 
 const router = express.Router();
+router.get('/suggestions', function (req, res) {
+  if (!res.params.q) {
+    return res.json({results: []});
+  }
+  const params = {
+    q: req.params.q,
+    location: 'Austin, Texas, United States',
+    hl: 'en',
+    gl: 'us',
+    api_key: process.env.API_KEY
+  };
+  const url = 'https://serpapi.com/search.json'
+  axios.get(url, {params: params})
+    .then(function (response) {
+      // handle success
+      return res.json({results: response.data.organic_results});
+    })
+    .catch(function (error) {
+      console.log(error.response.data);
+      res.json({message: 'Data not found. Please try again later.'});
+    });
+});
 
 router.post('/new', isLoggedIn, async (req, res) => {
   const poll = await models.poll.create({topic: req.body.topic, creatorId: req.user.id});

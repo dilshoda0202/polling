@@ -41,18 +41,7 @@ app.use((req, res, next) => {
   res.locals.currentUser = req.user;
   next();
 });
-// home route
-app.get('/movies', function (req, res) {
-  const url = 'https://serpapi.com/search.json?q=eternals+theater&location=Austin,+Texas,+United+States&hl=en&gl=us'
-  axios.get(url, {params: {api_key: process.env.API_KEY}})
-    .then(function (response) {
-      // handle success
-      return res.render('movies', {movies: response.data});
-    })
-    .catch(function (error) {
-      res.json({message: 'Data not found. Please try again later.'});
-    });
-});
+
 
 app.get('/', isLoggedIn, async (req, res) => {
   const query = await models.poll.findAll({
