@@ -11,31 +11,19 @@ const models = require('./models')
 const sequelize = require("sequelize");
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
 
-// home route
-app.get('/movies', function (req, res) {
-  const url = 'https://serpapi.com/search.json?q=eternals+theater&location=Austin,+Texas,+United+States&hl=en&gl=us'
-  axios.get(url, {params: {api_key: process.env.API_KEY}})
-    .then(function (response) {
-      // handle success
-      return res.render('movies', {movies: response.data});
-    })
-    .catch(function (error) {
-      res.json({message: 'Data not found. Please try again later.'});
-    });
-});
 
 
 app.set('view engine', 'ejs');
 
 app.use(require('morgan')('dev'));
-app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({ extended: false }));
 app.use(express.static(__dirname + '/public'));
 app.use(express.json());
 app.use(layouts);
 
 app.use(flash());            // flash middleware
 
-const store = new SequelizeStore({db: models.sequelize});
+const store = new SequelizeStore({ db: models.sequelize });
 store.sync();
 
 app.use(session({
@@ -61,12 +49,26 @@ app.get('/', isLoggedIn, async (req, res) => {
       {
         model: models.pollOption,
         as: 'options',
-        include: [{model: models.votes, as: 'votes'}]
+        include: [{ model: models.votes, as: 'votes' }]
       },
-      {model: models.votes, as: 'votes'}
+      { model: models.votes, as: 'votes' }
     ]
   });
-  const polls = query.map(el => el.get({plain: true}));
+
+  // home route
+  app.get('/movies', function (req, res) {
+    const url = 'https://serpapi.com/search.json?q=eternals+theater&location=Austin,+Texas,+United+States&hl=en&gl=us'
+    axios.get(url, { params: { api_key: process.env.API_KEY } })
+      .then(function (response) {
+        // handle success
+        return res.render('movies', { movies: response.data });
+      })
+      .catch(function (error) {
+        res.json({ message: 'Data not found. Please try again later.' });
+      });
+  });
+
+  const polls = query.map(el => el.get({ plain: true }));
   polls.forEach(p => {
     p.votesCount = p.votes.length;
     p.hasVoted = !!p.votes.find(v => v.userId === req.user.id);
@@ -79,7 +81,7 @@ app.get('/', isLoggedIn, async (req, res) => {
       }
     });
   });
-  res.render('index', {polls});
+  res.render('index', { polls });
 });
 
 app.get('/newpoll', isLoggedIn, (req, res) => {
@@ -91,8 +93,8 @@ app.use('/polls', require('./controllers/polls'));
 
 // Add this above /auth controllers
 app.get('/profile', isLoggedIn, (req, res) => {
-  const {id, name, email} = req.user.get();
-  res.render('profile', {id, name, email});
+  const { id, name, email } = req.user.get();
+  res.render('profile', { id, name, email });
 });
 
 const PORT = process.env.PORT || 3000;
