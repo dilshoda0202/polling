@@ -5,11 +5,11 @@ const axios = require("axios");
 
 const router = express.Router();
 router.get('/suggestions', function (req, res) {
-  if (!res.params.q) {
+  if (!req.query || !req.query.q) {
     return res.json({results: []});
   }
   const params = {
-    q: req.params.q,
+    q: req.query.q,
     location: 'Austin, Texas, United States',
     hl: 'en',
     gl: 'us',
@@ -19,7 +19,7 @@ router.get('/suggestions', function (req, res) {
   axios.get(url, {params: params})
     .then(function (response) {
       // handle success
-      return res.json({results: response.data.organic_results});
+      return res.json(response.data.organic_results);
     })
     .catch(function (error) {
       console.log(error.response.data);
