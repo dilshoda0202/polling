@@ -72,9 +72,10 @@ app.get('/', isLoggedIn, async (req, res) => {
     p.hasVoted = !!p.votes.find(v => v.userId === req.user.id);
     p.options.forEach(opt => {
       opt.percent = opt.votes.length / p.votesCount * 100;
-      opt.width = opt.percent;
-      if (!opt.width) {
-        opt.width = 4;
+      if (opt.percent > 0) {
+        opt.width = `${opt.percent}%`;
+      } else {
+        opt.width = `10px`;
       }
     });
   });

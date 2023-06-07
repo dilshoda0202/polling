@@ -22,7 +22,7 @@
                                             <%= option.title %>
                                         </div>
                                         <div class="h-[10px] rounded-md bg-primary mt-2"
-                                             style="width: <%= option.width %>%">
+                                             style="width: <%= option.width %>">
                                         </div>
                                     </div>
                                 </div>
@@ -57,6 +57,6 @@
             body: JSON.stringify({pollId, optionId}),
             headers: {'Content-Type': 'application/json'}
         });
-        console.log(pollId, optionId);
+        window.location.reload();
     }
 </script>
