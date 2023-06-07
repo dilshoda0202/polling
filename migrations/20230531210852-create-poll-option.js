@@ -12,9 +12,6 @@ module.exports = {
       title: {
         type: Sequelize.STRING
       },
-      voteCount: {
-        type: Sequelize.INTEGER
-      },
       pollId: {
         type: Sequelize.INTEGER,
         references: {
