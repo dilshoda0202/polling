@@ -8,6 +8,7 @@ const passport = require('./config/ppConfig');
 const isLoggedIn = require('./middleware/isLoggedIn');
 const axios = require('axios');
 const models = require('./models')
+const sequelize = require("sequelize");
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
 
 // home route
@@ -24,9 +25,6 @@ app.get('/movies', function (req, res) {
 });
 
 
-SECRET_SESSION = process.env.SECRET_SESSION;
-// console.log('>>>>', SECRET_SESSION);
-
 app.set('view engine', 'ejs');
 
 app.use(require('morgan')('dev'));
@@ -41,7 +39,7 @@ const store = new SequelizeStore({db: models.sequelize});
 store.sync();
 
 app.use(session({
-  secret: SECRET_SESSION,    // What we actually will be giving the user on our site as a session cookie
+  secret: process.env.SECRET_SESSION,    // What we actually will be giving the user on our site as a session cookie
   resave: false,             // Save the session even if it's modified, make this false
   saveUninitialized: true,    // If we have a new session, we save it, therefore making that true
   store: store
@@ -59,13 +57,27 @@ app.use((req, res, next) => {
 
 app.get('/', isLoggedIn, async (req, res) => {
   const query = await models.poll.findAll({
-    include: [{model: models.pollOption, as: 'options'}, {model: models.votes, as: 'votes'}],
+    include: [
+      {
+        model: models.pollOption,
+        as: 'options',
+        include: [{model: models.votes, as: 'votes'}]
+      },
+      {model: models.votes, as: 'votes'}
+    ]
   });
   const polls = query.map(el => el.get({plain: true}));
   polls.forEach(p => {
+    p.votesCount = p.votes.length;
     p.hasVoted = !!p.votes.find(v => v.userId === req.user.id);
+    p.options.forEach(opt => {
+      opt.percent = opt.votes.length / p.votesCount * 100;
+      opt.width = 4 * opt.percent;
+      if (!opt.width) {
+        opt.width = 10;
+      }
+    });
   });
-  console.log(polls[0]);
   res.render('index', {polls});
 });
 

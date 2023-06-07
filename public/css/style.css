@@ -1,4 +1,9 @@
-.bg-primary {
+.bg-primary-light {
     background: #FFCD29CC;
 }
+
+.bg-primary {
+    background: #FFCD29;
+}
+
 
