@@ -1,6 +1,6 @@
 # `Polling`
 
-A polling application to use with friends to decide what movie to watch.
+A polling application to use with friends to vote on topics. Current MVP version of the application uses a movie database API. You and your friends can vote create polls on what movies you'd like to see this weekend.
 
 ## How to Install
 1. `Fork` and `Clone` this repository in your terminal
@@ -13,12 +13,26 @@ A polling application to use with friends to decide what movie to watch.
 
 Visit 
 
+## User Stories
+- As a user, I want to sign up and create an account on the website, so that I can access its features and participate in movie voting with my friends.
+- As a user, I want to search for movies playing in theaters near me, so that I can see a list of available options for the weekend.
+- As a user, I want to see the current voting results, including the number of votes each movie has received, so that I can track the progress of each option.
+
+## Wireframe
+
+Login Page Mockup
+![mockup_login](./public/mockup_login.png)
+Poll Homepage Mockup
+![mockup_poll](./public/mockup_poll.png)
+
 ## Using the Website
 1. Sign up for an account
 2. Click on `New Poll`
 3. Fill in details of a poll and create your first poll
 
-## Screenshots
+- To delete a poll, click the trash icon and refresh the page
+
+## Website Screenshots
 
 Login Page
 ![login](./public/login.png)
@@ -45,9 +59,10 @@ SerpAPI
 - MYSQL
 - HTML5
 - CSS
-- NPM
 
-
+## Blockers
+- Time
+- How to create a poll and assign it a url that only people who have the link can access it to be able to vote on it
 
 ## Future Goals/Unsolved Problems
 1. Improve UI/UX for pulling up API
