@@ -15,14 +15,14 @@ const SequelizeStore = require("connect-session-sequelize")(session.Store);
 app.set('view engine', 'ejs');
 
 app.use(require('morgan')('dev'));
-app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({ extended: false }));
 app.use(express.static(__dirname + '/public'));
 app.use(express.json());
 app.use(layouts);
 
 app.use(flash());            // flash middleware
 
-const store = new SequelizeStore({db: models.sequelize});
+const store = new SequelizeStore({ db: models.sequelize });
 store.sync();
 
 app.use(session({
@@ -49,12 +49,12 @@ app.get('/', isLoggedIn, async (req, res) => {
       {
         model: models.pollOption,
         as: 'options',
-        include: [{model: models.votes, as: 'votes'}]
+        include: [{ model: models.votes, as: 'votes' }]
       },
-      {model: models.votes, as: 'votes'}
+      { model: models.votes, as: 'votes' }
     ]
   });
-  const polls = query.map(el => el.get({plain: true}));
+  const polls = query.map(el => el.get({ plain: true }));
   polls.forEach(p => {
     p.isOwner = p.creatorId === req.user.id;
     p.votesCount = p.votes.length;
@@ -68,8 +68,34 @@ app.get('/', isLoggedIn, async (req, res) => {
       }
     });
   });
-  res.render('index', {polls});
+  res.render('index', { polls });
 });
+
+// function updateTopic(pollId) {
+//   const newTopic = prompt('Enter the new topic:');
+
+//   if (newTopic) {
+//     const requestOptions = {
+//       method: 'PUT',
+//       headers: { 'Content-Type': 'application/json' },
+//       body: JSON.stringify({ topic: newTopic })
+//     };
+
+//     fetch(`/polls/${pollId}`, requestOptions)
+//       .then(response => {
+//         if (response.ok) {
+//           // Reload the page after successful update
+//           location.reload();
+//         } else {
+//           console.error('Failed to update the topic');
+//         }
+//       })
+//       .catch(error => {
+//         console.error('An error occurred:', error);
+//       });
+//   }
+// }
+
 
 app.get('/newpoll', isLoggedIn, (req, res) => {
   res.render('newpoll');
@@ -81,8 +107,8 @@ app.use('/profile', require('./controllers/profile'));
 
 // Add this above /auth controllers
 app.get('/profile', isLoggedIn, (req, res) => {
-  const {id, name, email} = req.user.get();
-  res.render('profile', {id, name, email});
+  const { id, name, email } = req.user.get();
+  res.render('profile', { id, name, email });
 });
 
 const PORT = process.env.PORT || 3000;

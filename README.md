@@ -30,11 +30,30 @@ Homepage with poll
 ![homepage_with_polls](./public/homepage_w_poll.png)
 Homepage with poll and the result
 ![homepage_with_poll_results](./public/homepage_w_poll_votes.png)
+Profile page
+![profile](./public/profile.png)
+
+## API
+SerpAPI
+
+## Languages and Frameworks Used
+- JS
+- Express JS
+- Node JS
+- Sequelize
+- Postgresql
+- MYSQL
+- HTML5
+- CSS
+- NPM
 
 
-## Future Goals
-1. Functionality for users to search for polls
-2. Functionality for users to vote on other weekend activities through additional APIs
+
+## Future Goals/Unsolved Problems
+1. Improve UI/UX for pulling up API
+2. Functionality to pull up movies playing near you
+3. Functionality for users to search for polls
+4. Functionality for users to vote on other weekend activities through additional APIs
 
 
 
